@@ -47,6 +47,9 @@ class ScatterPlot {
     var minX = d3.min( dataPoints, (d)=>d.x );
     var maxX = d3.max( dataPoints, (d)=>d.x );
     this.createXAxis(minX, maxX);
+    var minY = d3.min( dataPoints, (d)=>d.x );
+    var maxY = d3.max( dataPoints, (d)=>d.x );
+    this.createYAxis(minY, maxY);
   };
   
   private createXAxis( minX: number, maxX: number ) {
@@ -56,6 +59,15 @@ class ScatterPlot {
       .nice();
     var axis = d3.svg.axis().scale(this._xScale).orient('bottom');
     this._xAxisGroup.call(axis);
+  }
+  
+  private createYAxis( minY: number, maxY: number ) {
+    this._yScale = d3.scale.linear()
+      .domain([minY, maxY])
+      .range([this._height, 0])
+      .nice();
+    var axis = d3.svg.axis().scale(this._yScale).orient('left');
+    this._yAxisGroup.call(axis);
   }
 
 };
