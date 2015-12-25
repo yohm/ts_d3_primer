@@ -34,10 +34,12 @@ class ScatterPlot {
         'transform' : 'translate(' + this._paddingLeft + ',' + this._paddingTop + ')'
       });
     this._xAxisGroup = this._svg.append('g')
+      .classed('axis', true)
       .attr({
         'transform' : 'translate(' + this._paddingLeft + ',' + (this._height + this._paddingTop) + ')'
       });
     this._yAxisGroup = this._svg.append('g')
+      .classed('axis', true)
       .attr({
         'transform' : 'translate(' + this._paddingLeft + ',' + this._paddingTop + ')'
       });
