@@ -8,5 +8,15 @@
 }
 </style>
 <body>
-<script src="//d3js.org/d3.v3.min.js"></script>
-<script src="/hello.js"></script>
+
+  <div id="plot"></div>
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="/scatter_plot.js"></script>
+  <script>
+    d3.json('/data.json', function(d) {
+      var p = new ScatterPlot('#plot');
+      p.load(d);
+    });
+  </script>
+</body>
