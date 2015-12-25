@@ -50,6 +50,18 @@ class ScatterPlot {
     var minY = d3.min( dataPoints, (d)=>d.x );
     var maxY = d3.max( dataPoints, (d)=>d.x );
     this.createYAxis(minY, maxY);
+    
+    var dataSelection = this._pointsGroup
+      .selectAll('.point')
+      .data( dataPoints );
+    dataSelection.enter().append('circle')
+      .classed('point', true);
+    dataSelection.attr({
+      'cx': (d:DataPoint)=> this._xScale(d.x),
+      'cy': (d:DataPoint)=> this._yScale(d.y),
+      'r' : 4
+    });
+    dataSelection.exit().remove();
   };
   
   private createXAxis( minX: number, maxX: number ) {
