@@ -9,10 +9,7 @@ class LinePlot {
   private _svg: d3.Selection<any>;
   private _width = 800;
   private _height = 600;
-  private _paddingLeft = 50;
-	private _paddingRight = 30;
-	private _paddingBottom = 30;
-	private _paddingTop = 30;
+  private _padding = {left: 50, right: 30, top: 30, bottom: 30};
 
   private _pointsGroup: d3.Selection<any>;
   private _xAxisGroup: d3.Selection<any>;
@@ -24,24 +21,24 @@ class LinePlot {
     var selection = d3.select(container);
     this._svg = selection.append('svg')
       .attr({
-			  'width': this._paddingLeft + this._width + this._paddingRight,
-				'height': this._paddingTop + this._height + this._paddingBottom
+			  'width': this._padding.left + this._width + this._padding.right,
+				'height': this._padding.top + this._height + this._padding.bottom
 			});
     
     this._pointsGroup = this._svg.append('g')
       .classed('plot', true)
       .attr({
-        'transform' : 'translate(' + this._paddingLeft + ',' + this._paddingTop + ')'
+        'transform' : 'translate(' + this._padding.left + ',' + this._padding.top + ')'
       });
     this._xAxisGroup = this._svg.append('g')
       .classed('axis', true)
       .attr({
-        'transform' : 'translate(' + this._paddingLeft + ',' + (this._height + this._paddingTop) + ')'
+        'transform' : 'translate(' + this._padding.left + ',' + (this._height + this._padding.top) + ')'
       });
     this._yAxisGroup = this._svg.append('g')
       .classed('axis', true)
       .attr({
-        'transform' : 'translate(' + this._paddingLeft + ',' + this._paddingTop + ')'
+        'transform' : 'translate(' + this._padding.left + ',' + this._padding.top + ')'
       });
   }
   
