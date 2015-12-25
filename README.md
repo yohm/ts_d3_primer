@@ -1,6 +1,8 @@
+*WORK IN PROGRESS*
+
 # A minimal sample of d3.js using TypeScript
 
-Minimal setup of d3.js using TypeScript.
+d3.js primer using TypeScript.
 
 ## Preparation
 
@@ -18,24 +20,18 @@ tsd install
 
 The definition file is saved in `typings/d3` directory.
 
-(Optional) If you a definition file for another library, install using a command like the following.
-
-```
-tsd install jquery --save
-```
-
 ## showing the results
 
 Compile ts file.
 
 ```
-tsc hello.ts
+tsc *.ts
 ```
 
 If you give a `-w` option, the change of the file is monitored and automatically compiled whenever you edit the file.
 
 ```
-tsc -w hello.ts
+tsc -w *.ts
 ```
 
 Run `http-server` and access http://localhost:8080
