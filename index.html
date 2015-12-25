@@ -1,22 +1,8 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<style>
-.axis path,line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-</style>
 <body>
-
-  <div id="plot"></div>
-
-  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src="/scatter_plot.js"></script>
-  <script>
-    d3.json('/data.json', function(d) {
-      var p = new ScatterPlot('#plot');
-      p.load(d);
-    });
-  </script>
+  <ul>
+    <li><a href="/scatter_plot.html">scatter plot</a></li>
+    <li><a href="/line_plot.html">line plot</a></li>
+  </ul>
 </body>
