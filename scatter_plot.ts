@@ -49,8 +49,8 @@ class ScatterPlot {
     var minX = d3.min( dataPoints, (d)=>d.x );
     var maxX = d3.max( dataPoints, (d)=>d.x );
     this.createXAxis(minX, maxX);
-    var minY = d3.min( dataPoints, (d)=>d.x );
-    var maxY = d3.max( dataPoints, (d)=>d.x );
+    var minY = d3.min( dataPoints, (d)=>d.y );
+    var maxY = d3.max( dataPoints, (d)=>d.y );
     this.createYAxis(minY, maxY);
     
     var dataSelection = this._pointsGroup
