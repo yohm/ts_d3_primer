@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.axis path,line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.plot path {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+</style>
+<body>
+
+  <div id="plot"></div>
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="/multiseries_line_plot.js"></script>
+  <script>
+    d3.json('/multiseries_data.json', function(d) {
+      var p = new MultiSeriesLinePlot('#plot');
+      p.load(d);
+    });
+  </script>
+</body>
