@@ -49,14 +49,25 @@ class LinePlot {
     var minY = d3.min( dataPoints, (d)=>d.y );
     var maxY = d3.max( dataPoints, (d)=>d.y );
     this.createYAxis(minY, maxY);
-    
-    var line = d3.svg.line<DataPoint>()
-      .x( (d:DataPoint)=>this._xScale(d.x) )
-      .y( (d:DataPoint)=>this._yScale(d.y) );
+
+    // svg要素で線を作成するときにはpath要素で作る
+    // 線の配置は属性 'd' で指定される
+    //   e.g. <path d="M800,600L640,600L480,480L320,300L160,420L0,0"></path>
+    // このd要素を簡潔に作成するために、line generatorが存在する
+    // d3.svg.line() でline generatorが作成される
+    // デフォルトでは、このline generatorは座標点([number,number])の配列を引数に取る
+    var line = d3.svg.line();
     var dataSelection = this._pointsGroup
       .append('path')
-      .datum( dataPoints )
-      .attr('d', line);
+      .datum( dataPoints )  // dataではなくdatum。pathの１要素に対して、全データ点をバインドするため
+      .attr('d', (points)=> {
+        // pointsにはdataPointsが入っている。座標点の配列にマップする
+        var mapped = points.map((point):[number,number] =>{
+          return [this._xScale(point.x), this._yScale(point.y)]
+        });
+        // 例えば mapped => [ [800,600], [640,600], [480,480], [320,300], ... ]
+        return line(mapped);
+      });
   };
   
   private createXAxis( minX: number, maxX: number ) {
