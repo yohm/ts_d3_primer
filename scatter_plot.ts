@@ -12,16 +12,16 @@ class ScatterPlot {
   // 描画領域の幅と高さを _width, _heightとして定義し、
   // その周辺のpaddingの大きさを _padding として定義する 
   // d3.Selectionの型パラメータはanyにしているが、ここには何の型を入れるべきなのかわかっていない。
-  private _svg: d3.Selection<any>;
-  private _width = 800;
-  private _height = 600;
-  private _padding = {left: 50, right: 30, top: 30, bottom: 30};
+  protected _svg: d3.Selection<any>;
+  protected _width = 800;
+  protected _height = 600;
+  protected _padding = {left: 50, right: 30, top: 30, bottom: 30};
 
-  private _pointsGroup: d3.Selection<any>;  // Plotのデータ点を保持するグループ
-  private _xAxisGroup: d3.Selection<any>;   // x軸を保持するグループ
-	private _yAxisGroup: d3.Selection<any>;   // y軸を保持するグループ
-  private _xScale: d3.scale.Linear<number,number>;  // xScale。型パラメータは変換の前後の型
-  private _yScale: d3.scale.Linear<number,number>;  // yScale
+  protected _pointsGroup: d3.Selection<any>;  // Plotのデータ点を保持するグループ
+  protected _xAxisGroup: d3.Selection<any>;   // x軸を保持するグループ
+	protected _yAxisGroup: d3.Selection<any>;   // y軸を保持するグループ
+  protected _xScale: d3.scale.Linear<number,number>;  // xScale。型パラメータは変換の前後の型
+  protected _yScale: d3.scale.Linear<number,number>;  // yScale
   
   constructor(container:string) {
     var selection = d3.select(container);
