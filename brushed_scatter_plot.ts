@@ -21,8 +21,8 @@ class BrushedScatterPlot extends ScatterPlot {
 
     this._brush
       .on("brush", () => {
+        // extentは２次元配列。左下の点、右上の点の値を保持している
         var extent = this._brush.extent();
-        console.log(extent);
         // データ点のselectionを取得
         var points = this._pointsGroup.selectAll('.point');
         // 選択された点に.selectedクラスをつける。
