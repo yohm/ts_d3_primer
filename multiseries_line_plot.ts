@@ -52,7 +52,7 @@ class MultiSeriesLinePlot {
     var maxY = d3.max( dataPoints, (d)=>{return d3.max([d.y1,d.y2,d.y3]);} );
     this.createYAxis(minY, maxY);
 
-    var color = d3.scale.category10();
+    var color = d3.scale.category10();  // categorical colorを返すfunction。color(0) というようにindexを渡すとそれぞれの色を返す
     var line = d3.svg.line<[number,number]>()
       .x( (point)=>this._xScale(point[0]) )
       .y( (point)=>this._yScale(point[1]) );
@@ -66,11 +66,11 @@ class MultiSeriesLinePlot {
       .datum( (key)=>{  // override datum with the data points
         return dataPoints.map( (d)=>{ return [d.x, d[key] ]; });
       })
-      .attr('d', line)
+      .attr('d', line)   // line(datum) が実行され、その結果が格納される。
       .style('stroke', (d,i)=>color(i) );
-    series_groups
+    series_groups        // 判例のテキストを追加する
       .append('text')
-      .datum( (key) => {
+      .datum( (key) => {  // y1,y2,y3 というデータを上書きする
         var last = dataPoints[dataPoints.length-1];
         return {key: key, last_x: last.x, last_y: last[key] };
       })

@@ -93,8 +93,8 @@ class ScatterPlot {
     var axis = d3.svg.axis().scale(this._xScale).orient('bottom');
       // orient というのは軸のtickができる方向。x軸なので線の下部にtickをつける
     this._xAxisGroup.call(axis);
-      // d3.Selectionがaxisオブジェクトを引数にしてcallすると、
-      // 要素の下部に軸の描画要素が作成される。
+      // d3.Selection#callを実行すると、引数にした関数が実行される。つまり axis(this._xAxisGroup) と等価
+      // axis generatorを実行すると要素の下部に軸の描画要素が作成される。
       // line,path,textなどが追加される。
       // cssで .axis path,line の要素に適切にスタイルを設定する必要がある。
       // 特に fill:none を設定しておかないと、太い線が現れるだけになってしまうので注意。
