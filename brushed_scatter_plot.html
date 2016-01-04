@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.axis path,line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.brush rect.extent {
+  stroke: orangered;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+.point {
+  fill: #999;
+  stroke: #fff;
+}
+.point.selected {
+  fill: red;
+  fill-opacity: 1;
+  stroke: brown;
+}
+</style>
+<body>
+
+  <div id="plot"></div>
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="/scatter_plot.js"></script>
+  <script src="/brushed_scatter_plot.js"></script>
+  <script>
+    d3.json('/data.json', function(d) {
+      var p = new BrushedScatterPlot('#plot');
+      p.load(d);
+    });
+  </script>
+</body>
