@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.axis .domain {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+  stroke-width: 10px;
+  stroke-linecap: round;
+}
+.axis .halo {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 8px;
+  stroke-linecap: round;
+}
+.slider .handle {
+  fill: #fff;
+  stroke: #000;
+  stroke-opacity: .5;
+  stroke-width: 1.25px;
+  cursor: crosshair;
+}
+</style>
+<body>
+
+  <div id="slider"></div>
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="/slider.js"></script>
+  <script>
+    var p = new Slider('#slider', 0, 180);
+    p.setCallback( function(n) {
+      console.log(n);
+    })
+  </script>
+</body>
