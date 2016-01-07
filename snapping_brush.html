@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> 
+.grid-background {
+  fill: #ddd;
+}
+.axis path, .axis line{
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.grid {
+  fill: none;
+  stroke: #fff;
+  shape-rendering: crispEdges;
+}
+.brush {
+  stroke: #000;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+</style>
+<body>
+
+  <div id="snapping_brush"></div>
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
+  <script src="/snapping_brush.js"></script>
+  <script>
+    var p = new SnappingBrush('#snapping_brush', 0, 10);
+    p.setCallback( function(x0,x1) {
+      console.log(x0,x1);
+    })
+  </script>
+</body>
