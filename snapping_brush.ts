@@ -13,6 +13,7 @@ class SnappingBrush {
   
   constructor(container:string, min:number, max:number) {
     // 実装方針:
+    //   整数にsnapするbrush。
     //   背景をrectで作成する
     //   rectにAxisを使って線を入れて描画領域が見えやすくなるようにする
     //   もう一つAxisを入れて、rect配下に軸を描画
@@ -26,22 +27,20 @@ class SnappingBrush {
   // brushされたときに呼ばれる関数
   public setCallback( f: (x0:number,x1:number)=>void ) {
     this._callback = f;
-    // this._brush.event( this._drawGroup );
   }
   
   private createScale(min: number, max: number) {
     this._xScale = d3.scale.linear()
-      .domain( [min,max] )
+      .domain( [Math.round(min)-0.1, Math.round(max)+0.1] )
       .range( [0, this._width] )
       .clamp(true);  // domain外の値が与えられたときに外挿せずに常にrange内の値を返す
-    this._xScale.ticks( max-min );
   }
   
   private createBrush() {
     var min = this._xScale.domain()[0];
     this._brush = d3.svg.brush()  // brush generatorを作成
       .x( this._xScale )  // xScaleをセット
-      .extent( [min, min+1] );     // extentの初期値。1次元のbrushなので１次元配列を渡す
+      .extent( [min, Math.round(min)+0.5] );     // extentの初期値。1次元のbrushなので１次元配列を渡す
 
     var gBrush = this._drawGroup.append("g")
       .attr("class", "brush")
@@ -51,26 +50,30 @@ class SnappingBrush {
 
     this._brush.on("brush", () => {
       var ext = <[number,number]> this._brush.extent();
-      console.log(ext);
       var new_ext: [number,number];
       
       // ドラッグの場合
       if( d3.event.mode === "move" ) {
-        var x0 = Math.round( ext[0] );
+        var x0 = Math.round( ext[0]-0.5 )+0.5;
         var x1 = x0 + Math.round(ext[1]-ext[0]);
         new_ext = [x0,x1];
       }
       else {  // 大きさを変えた場合
-        var x0 = Math.round( ext[0] );
-        var x1 = Math.round( ext[1] );
+        var x0 = Math.round( ext[0]-0.5 )+0.5;
+        var x1 = Math.round( ext[1]-0.5 )+0.5;
         if( x0 >= x1 ) {
-          x0 = Math.floor( ext[0] );
-          x1 = Math.ceil( ext[1] );
+          x0 = Math.round( ext[0]-0.5 )+0.5;
+          x1 = x0+1;
         }
         new_ext = [x0,x1];
       }
       // brushを再描画
-      gBrush.call( this._brush.extent(new_ext) );      
+      gBrush.call( this._brush.extent(new_ext) );
+      
+      // callback関数を呼ぶ
+      if( this._callback ) {
+        this._callback( Math.ceil(new_ext[0]), Math.floor(new_ext[1]) );
+      }
     });
   }
   
