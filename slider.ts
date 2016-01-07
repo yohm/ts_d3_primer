@@ -13,6 +13,12 @@ class Slider {
   protected _callback: (number)=>void; 
   
   constructor(container:string, min:number, max:number) {
+    // sliderを実装する方針:
+    //   axisとcircleを使ってsliderの見た目を実装する
+    //   axisの背景に透明なbrushを配置
+    //   背景がクリックされると、その場所にcircleをずらして値を更新する
+    //   見た目上はcircleを動かしているように見える
+    //   http://bl.ocks.org/mbostock/6452972 を参考に実装
     this.createScale(min, max);
     this.createBrush();
     this.drawAxisAndBrush(container);
@@ -89,6 +95,8 @@ class Slider {
       .attr("transform", `translate(0,${this._height/2})`)
       .attr("r", 9);
     
+    // callbackを呼ぶ
+    //   eventメソッドは引数としてd3.selectionを取る
     slider
       .call(this._brush.event); 
   }
