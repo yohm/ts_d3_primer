@@ -31,7 +31,7 @@ class SnappingBrush {
   
   private createScale(min: number, max: number) {
     this._xScale = d3.scale.linear()
-      .domain( [Math.round(min)-0.1, Math.round(max)+0.1] )
+      .domain( [Math.round(min)-0.5, Math.round(max)+0.5] )
       .range( [0, this._width] )
       .clamp(true);  // domain外の値が与えられたときに外挿せずに常にrange内の値を返す
   }
