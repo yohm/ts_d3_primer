@@ -95,6 +95,8 @@ class SnappingBrush {
       });
     
     // 背景のrectに対してAxisで線を描画
+    var numTicks = Math.round( this._xScale.domain()[1] - this._xScale.domain()[0] + 1 );
+    console.log(numTicks);
     this._drawGroup.append('g')
       .attr('class', "x grid")
       .attr("transform", `translate(0,${this._height})`)
@@ -104,6 +106,7 @@ class SnappingBrush {
           .orient("bottom")
           .tickSize(-this._height)
           .tickFormat("")
+          .ticks(numTicks)
       );
 
     // 軸を描画
@@ -114,6 +117,7 @@ class SnappingBrush {
         d3.svg.axis()
           .scale(this._xScale)
           .orient("bottom")
+          .ticks(numTicks)
       );
   }
 };
