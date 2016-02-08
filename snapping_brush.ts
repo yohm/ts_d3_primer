@@ -61,8 +61,8 @@ class SnappingBrush {
       else {  // 大きさを変えた場合
         var x0 = Math.round( ext[0]-0.5 )+0.5;
         var x1 = Math.round( ext[1]-0.5 )+0.5;
-        if( x0 >= x1 ) {
-          x0 = Math.round( ext[0]-0.5 )+0.5;
+        if( x1-x0 <= 1 ) {
+          x0 = Math.round( ext[0] ) - 0.5;
           x1 = x0+1;
         }
         new_ext = [x0,x1];
